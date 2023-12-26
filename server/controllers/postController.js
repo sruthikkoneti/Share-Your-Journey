@@ -22,3 +22,14 @@ export const createPost = async (req, res, next) => {
         next(ex);
     }
 };
+export const getAllPosts = async (req, res, next) => {
+    try {
+        const posts=await Post.find();
+        if(!posts){
+            res.status(404).json({"msg":"No posts found"})
+        }
+        res.status(201).json(posts);
+    } catch (ex) {
+        next(ex);
+    }
+};
