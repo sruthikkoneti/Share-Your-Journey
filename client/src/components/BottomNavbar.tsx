@@ -16,25 +16,21 @@ const BottomNavbar: React.FC = () => {
         <li>
           <Link to="/user" className="flex flex-col items-center text-xl">
             <FaUser />
-            <span>User</span>
           </Link>
         </li>
         <li>
           <a href="#" className="flex flex-col items-center text-xl">
             <FaPlus />
-            <span>Create</span>
           </a>
         </li>
         <li>
           <a href="#" className="flex flex-col items-center text-xl">
             <FaSearch />
-            <span>Search</span>
           </a>
         </li>
         <li>
           <button onClick={handleLogout} className="flex flex-col items-center text-xl">
             <FaSignOutAlt />
-            <span>Logout</span>
           </button>
         </li>
       </ul>
