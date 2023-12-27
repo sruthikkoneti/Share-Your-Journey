@@ -55,7 +55,6 @@ export const getAllPosts = async (req, res, next) => {
 };
 
 export const getPostsForMap = async (req, res,next) => {
-    console.log("clicked")
     try {
         const posts = await Post.aggregate([
             {
