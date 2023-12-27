@@ -7,7 +7,7 @@ const router = Router();
 //Protected Routes
 router.post("/create", [auth, uploadPost], createPost);
 router.get("/", auth,getAllPosts);
-router.get("/map",getPostsForMap)
+router.get("/map",auth,getPostsForMap)
 
 
 

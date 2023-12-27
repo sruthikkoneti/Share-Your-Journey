@@ -6,3 +6,5 @@
  export const getAllPosts=`${host}/journey`
 
  export const getUserInfo=`${host}/user`
+
+ export const getMapPosts=`${host}/journey/map`
