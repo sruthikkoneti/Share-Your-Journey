@@ -13,6 +13,16 @@ const PostSchema=new mongoose.Schema(
             type:String,
             required:true
         },
+        location:{
+            type:String,
+            required:true
+        },
+        coordinateX:{
+            type:String
+        },
+        coordinateY:{
+            type:String
+        },
         owner: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User"

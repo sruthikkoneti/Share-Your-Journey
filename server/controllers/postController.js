@@ -1,27 +1,43 @@
 import Post from "../models/Post.js"
 import fs from 'fs/promises';
 import User from "../models/User.js";
+import axios from "axios";
 
 export const createPost = async (req, res, next) => {
     try {
-        const { title, caption } = req.body;
+        const { title, caption, location } = req.body;
         const ownerId = req.user.user_id;
 
         const photoUrl = `/file_uploads/${ownerId}/${req.file.filename}`;
 
-        const newPost = new Post({
-            title,
-            caption,
-            photo: photoUrl,
-            owner: ownerId
-        });
+        const nominatimApiUrl = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(location)}`;
 
-        const savedPost = await newPost.save();
+        const nominatimResponse = await axios.get(nominatimApiUrl);
 
-        const abc=await User.findOneAndUpdate({_id:ownerId}, { $push: { posts: savedPost._id } });
-        console.log(abc)
+        if (nominatimResponse.data.length > 0) {
+            const { lat, lon } = nominatimResponse.data[0];
+            
+            const newPost = new Post({
+                title,
+                caption,
+                photo: photoUrl,
+                location,
+                coordinateX: lat.toString(),
+                coordinateY: lon.toString(),
+                owner: ownerId
+            });
 
-        res.status(201).send(savedPost);
+            const savedPost = await newPost.save();
+            
+            await User.findOneAndUpdate(
+                { _id: ownerId },
+                { $push: { posts: savedPost._id } }
+            );
+
+            res.status(201).json(savedPost);
+        } else {
+            res.status(404).json({ error: 'Location not found' });
+        }
     } catch (ex) {
         next(ex);
     }
