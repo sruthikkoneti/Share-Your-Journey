@@ -4,3 +4,5 @@
  export const loginRoute=`${host}/auth/login`
 
  export const getAllPosts=`${host}/journey`
+
+ export const getUserInfo=`${host}/user`

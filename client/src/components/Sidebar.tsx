@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Sidebar: React.FC = () => {
 
@@ -11,12 +11,12 @@ const Sidebar: React.FC = () => {
   };
 
   return (
-    <aside className="bg-gray-900 text-white h-screen w-100 mx-0">
+    <aside className="bg-blue-200 text-black h-screen w-100 mx-0">
       <div className="p-4">
         <h2 className="text-2xl font-bold mb-4">Sidebar</h2>
         <ul className="space-y-2">
           <li>
-            <a href="#" className="block hover:text-gray-300">Profile</a>
+            <Link to='/user' className="block hover:text-gray-300" >Profile</Link>
           </li>
           <li>
             <a href="#" className="block hover:text-gray-300">Share</a>
