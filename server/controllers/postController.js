@@ -16,7 +16,7 @@ export const createPost = async (req, res, next) => {
 
         if (nominatimResponse.data.length > 0) {
             const { lat, lon } = nominatimResponse.data[0];
-            
+
             const newPost = new Post({
                 title,
                 caption,
@@ -28,7 +28,7 @@ export const createPost = async (req, res, next) => {
             });
 
             const savedPost = await newPost.save();
-            
+
             await User.findOneAndUpdate(
                 { _id: ownerId },
                 { $push: { posts: savedPost._id } }
@@ -53,3 +53,37 @@ export const getAllPosts = async (req, res, next) => {
         next(ex);
     }
 };
+
+export const getPostsForMap = async (req, res,next) => {
+    console.log("clicked")
+    try {
+        const posts = await Post.aggregate([
+            {
+                $lookup: {
+                    from: "users",
+                    localField: "owner",
+                    foreignField: "_id",
+                    as: "user"
+                }
+            },
+            {
+                $unwind: "$user" // Deconstruct the user array
+            },
+            {
+                $project: {
+                    _id: 0,
+                    title: 1,
+                    caption: 1,
+                    location: 1,
+                    coordinateX: 1,
+                    coordinateY: 1,
+                    "user.username": 1 
+                }
+            }
+        ]);
+
+        res.status(200).json(posts);
+    } catch (ex) {
+        next(ex);
+    }
+}
