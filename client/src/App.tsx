@@ -3,6 +3,7 @@ import './App.css'
 import Auth from './pages/Auth'
 import Home from './pages/Home'
 import Profile from './pages/Profile'
+import Spam from './pages/spam'
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Routes>
           <Route path='/auth' element={<Auth/>} />
           <Route path='/' element={token ?<Home/> : <Auth/>} />
+          <Route path='/spam' element={token ?<Spam/> : <Auth/>} />
           <Route path='/user' element={token ? <Profile/> : <Auth/>} />
         </Routes>
       </BrowserRouter>

@@ -4,61 +4,74 @@ import Navbar from '../components/Navbar';
 import Sidebar from '../components/Sidebar';
 import Post from '../components/Post';
 import { getAllPosts } from '../utils/apiRoutes';
+import BottomNavbar from '../components/BottomNavbar';
 
 interface PostData {
-  _id: string;
-  title: string;
-  photos: string[];
-  caption: string;
+    _id: string;
+    title: string;
+    photos: string[];
+    caption: string;
 }
 
 const Home: React.FC = () => {
-  const [posts, setPosts] = useState<PostData[]>([])
-  const token = localStorage.getItem("token")
+    const [posts, setPosts] = useState<PostData[]>([]);
+    const token = localStorage.getItem('token');
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
+    useEffect(() => {
+        const fetchPosts = async () => {
+            try {
+                const response = await axios.get<PostData[]>(getAllPosts, {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                setPosts(response.data);
+            } catch (error) {
+                console.log(error);
+            }
+        };
 
-        const response = await axios.get<PostData[]>(getAllPosts, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        setPosts(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+        fetchPosts();
+    }, [token]);
 
-    fetchPosts();
-  }, [token]);
+    return (
+        <>
+            <div className="flex h-screen flex-col">
+                <div className="h-20"><Navbar /></div>
+                <div className="relative flex-1 overflow-y-auto">
+                    <div className="lg:grid lg:grid-cols-5 gap-0 md:grid md:grid-cols-5 sm:flex sm:flex-col">
+                        <div className="first top-20 col-span-1">
+                            <div className="fixed w-1/5">
 
-  return (
-    <div className="flex">
-      <Navbar />
-      <div className="flex-1 flex justify-end">
-        <div className="lg:w-2/3 md:w-2/3 sm:w-full mt-16 flex justify-center">
-          <div className="lg:w-1/2 md:w-1/2 sm:p-4">
-            {posts &&
-              posts.map((post) => (
-                <Post
-                  key={post._id}
-                  title={post.title}
-                  photo={post.photos[0]}
-                  caption={post.caption}
-                />
-              ))}
-          </div>
-        </div>
-        <div className="hidden lg:block w-1/3 mt-20">
-           <div className="fixed mt-0 w-full">
-           <Sidebar />
-           </div>
-          </div>
-      </div>
-    </div>
-  );
+                            </div>
+                        </div>
+                        <div className="lg:col-span-3 md:col-span-3">
+                            {posts &&
+                                posts.map((post) => (
+                                    <Post
+                                        key={post._id}
+                                        title={post.title}
+                                        photo={post.photos[0]}
+                                        caption={post.caption}
+                                    />
+                                ))
+                            }
+                        </div>
+                        <div className="third right-0 top-20 lg:col-span-1 md:col-span-1 hidden lg:block">
+                            <div className="fixed w-1/5">
+                                <Sidebar />
+                            </div>
+                        </div>
+                        <div className="lg:hidden md:hidden bottom-0">
+                            <div className="fixed w-1/5">
+                                <BottomNavbar />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </>
+    );
 };
 
 export default Home;
