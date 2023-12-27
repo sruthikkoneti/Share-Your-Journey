@@ -9,7 +9,7 @@ import BottomNavbar from '../components/BottomNavbar';
 interface PostData {
     _id: string;
     title: string;
-    photos: string[];
+    photo: string;
     caption: string;
 }
 
@@ -51,7 +51,7 @@ const Home: React.FC = () => {
                                     <Post
                                         key={post._id}
                                         title={post.title}
-                                        photo={post.photos[0]}
+                                        photo={post.photo}
                                         caption={post.caption}
                                     />
                                 ))

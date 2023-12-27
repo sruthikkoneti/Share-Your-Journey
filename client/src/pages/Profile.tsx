@@ -16,7 +16,7 @@ interface UserData {
 interface PostData {
   _id: string;
   title: string;
-  photos: string[];
+  photo: string;
   caption: string;
 
 }
@@ -66,7 +66,7 @@ const Profile: React.FC = () => {
                   <Post
                     key={userPost._id}
                     title={userPost.title}
-                    photo={userPost.photos[0]}
+                    photo={userPost.photo}
                     caption={userPost.caption}
                   />
                 ))}
