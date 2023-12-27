@@ -7,12 +7,12 @@ export const createPost = async (req, res, next) => {
         const { title, caption } = req.body;
         const ownerId = req.user.user_id;
 
-        const photoUrls = req.files.map((file) => `/file_uploads/${ownerId}/${file.filename}`);
+        const photoUrl = `/file_uploads/${ownerId}/${req.file.filename}`;
 
         const newPost = new Post({
             title,
             caption,
-            photos: photoUrls,
+            photo: photoUrl,
             owner: ownerId
         });
 

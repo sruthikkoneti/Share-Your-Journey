@@ -23,7 +23,7 @@ const createStorageEngine = () => {
 }
 
 export const uploadPost = (req, res, next) => {
-  const multerUpload = multer({ storage: createStorageEngine() }).array("photos", 5);
+  const multerUpload = multer({ storage: createStorageEngine() }).single("photo");
 
   multerUpload(req, res, (err) => {
     if (err) {

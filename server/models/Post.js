@@ -9,10 +9,10 @@ const PostSchema=new mongoose.Schema(
         caption:{
             type:String
         },
-        photos:[{
+        photo:{
             type:String,
             required:true
-        }],
+        },
         owner: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User"
