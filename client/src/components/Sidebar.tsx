@@ -19,7 +19,7 @@ const Sidebar: React.FC = () => {
             <Link to='/user' className="block hover:text-gray-300" >Profile</Link>
           </li>
           <li>
-            <a href="#" className="block hover:text-gray-300">Share</a>
+            <Link to="/create" className="block hover:text-gray-300">Share</Link>
           </li>
           <li>
             <a href="#" className="block hover:text-gray-300">Settings</a>

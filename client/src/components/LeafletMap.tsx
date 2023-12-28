@@ -62,7 +62,7 @@ const LeafletMap: React.FC<LeafletMapProps> = ({ mapPosts }) => {
                                 <Popup>
                                     <div>
                                         <h3>{post.title}</h3>
-                                        <img src={`localhost:5000${post.photo}`} alt="photo" />
+                                        <p><FaLocationDot/>{post.location}</p>
                                         <p>{post.caption}</p>
                                         <p>Posted by: {post.user.username}</p>
                                     </div>

@@ -4,6 +4,7 @@ import Auth from './pages/Auth'
 import Home from './pages/Home'
 import Profile from './pages/Profile'
 import MapPage from './pages/MapPage'
+import Create from './pages/Create'
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
           <Route path='/' element={token ? <Home /> : <Auth />} />
           <Route path='/map' element={token ? <MapPage /> : <Auth />} />
           <Route path='/user' element={token ? <Profile /> : <Auth />} />
+          <Route path='/create' element={token ? <Create /> : <Auth />} />
         </Routes>
       </BrowserRouter>
     </>

@@ -76,6 +76,7 @@ export const getPostsForMap = async (req, res,next) => {
                     location: 1,
                     coordinateX: 1,
                     coordinateY: 1,
+                    photo:1,
                     "user.username": 1 
                 }
             }

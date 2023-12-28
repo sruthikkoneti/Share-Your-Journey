@@ -8,3 +8,5 @@
  export const getUserInfo=`${host}/user`
 
  export const getMapPosts=`${host}/journey/map`
+
+ export const newPost=`${host}/journey/create`

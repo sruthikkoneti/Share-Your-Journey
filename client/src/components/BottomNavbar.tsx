@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { FaUser, FaPlus, FaSearch, FaSignOutAlt } from 'react-icons/fa'; // Import Flat Color Icons
+import { FaUser, FaPlus, FaSearch, FaSignOutAlt, FaMap } from 'react-icons/fa'; // Import Flat Color Icons
 
 const BottomNavbar: React.FC = () => {
   const navigate = useNavigate();
@@ -19,9 +19,14 @@ const BottomNavbar: React.FC = () => {
           </Link>
         </li>
         <li>
-          <a href="#" className="flex flex-col items-center text-xl">
+          <Link to="/map" className="flex flex-col items-center text-xl">
+            <FaMap />
+          </Link>
+        </li>
+        <li>
+          <Link to="/create" className="flex flex-col items-center text-xl">
             <FaPlus />
-          </a>
+          </Link>
         </li>
         <li>
           <a href="#" className="flex flex-col items-center text-xl">
