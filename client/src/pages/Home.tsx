@@ -36,11 +36,11 @@ const Home: React.FC = () => {
 
     return (
         <>
-            <div className="flex h-screen flex-col">
+            <div className="flex h-screen flex-col bg-gradient-to-r from-blue-500 to-purple-500 text-white">
                 <div className="h-20"><Navbar /></div>
                 <div className="relative flex-1 overflow-y-auto">
                     <div className="lg:grid lg:grid-cols-5 gap-0 md:grid md:grid-cols-5 sm:flex sm:flex-col">
-                        <div className="first top-20 col-span-1">
+                        <div className="first top-20 col-span-1 bg-gradient-to-r from-yellow-400 to-red-500">
                             <div className="fixed w-1/5">
 
                             </div>
@@ -57,12 +57,12 @@ const Home: React.FC = () => {
                                 ))
                             }
                         </div>
-                        <div className="third right-0 top-20 lg:col-span-1 md:col-span-1 hidden lg:block">
+                        <div className="third right-0 top-20 lg:col-span-1 md:col-span-1 hidden lg:block bg-gradient-to-r from-yellow-400 to-red-500">
                             <div className="fixed w-1/5">
                                 <Sidebar />
                             </div>
                         </div>
-                        <div className="lg:hidden md:hidden bottom-0">
+                        <div className="lg:hidden md:hidden bottom-0 bg-gradient-to-r from-blue-500 to-purple-500">
                             <div className="fixed w-1/5">
                                 <BottomNavbar />
                             </div>

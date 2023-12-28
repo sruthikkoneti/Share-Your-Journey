@@ -8,7 +8,7 @@ interface PostProps {
 
 const Post: React.FC<PostProps> = ({ title, photo, caption }) => {
   return (
-    <div className="bg-white rounded-lg shadow-md p-4 mb-4">
+    <div className="bg-gradient-to-r from-white-50 to-white-75 bg-opacity-50 rounded-lg shadow-md p-4 mb-4">
       <div className="mb-2 font-semibold">{title}</div>
       <img src={`http://localhost:5000${photo}`} alt="Post" className="rounded-md mb-2 w-full" />
       <div>{caption}</div>

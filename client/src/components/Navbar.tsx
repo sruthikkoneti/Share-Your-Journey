@@ -1,5 +1,4 @@
-import React from 'react';
-import { Link } from 'react-router-dom'; // Import Link from React Router
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const scrollToTop = () => {
@@ -10,9 +9,9 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-blue-200 text-white py-6 px-4 w-full fixed top-0 shadow-md cursor-pointer" onClick={scrollToTop}>
+    <nav className="bg-gradient-to-r from-blue-500 to-purple-500 text-white py-6 px-4 w-full fixed top-0 shadow-md cursor-pointer" onClick={scrollToTop}>
       <div className="container mx-auto text-center">
-        <Link to="/" className="text-2xl font-bold text-black text-center">
+        <Link to="/home" className="text-2xl font-bold text-white text-center">
           ShareYourJourney
         </Link>
       </div>

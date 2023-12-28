@@ -51,7 +51,7 @@ const Auth = () => {
       localStorage.setItem('token', token);
       localStorage.setItem('user_id', user_id);
 
-      navigate("/")
+      navigate("/home")
 
       // Perform further actions like redirection or state updates
     } catch (error) {
