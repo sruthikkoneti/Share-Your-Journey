@@ -6,10 +6,12 @@ import Navbar from '../components/Navbar';
 import ProfileCard from '../components/ProfileCard';
 import Sidebar from '../components/Sidebar';
 import BottomNavbar from '../components/BottomNavbar';
+import Form from '../components/Form';
 
 interface UserData {
   username: string;
   posts: PostData[];
+  bio?:string
 
 }
 
@@ -34,7 +36,6 @@ const Profile: React.FC = () => {
             Authorization: `Bearer ${token}`,
           },
         })
-        console.log(response.data)
         setUser(response.data);
         setUserPosts(response.data.posts)
       } catch (error) {
@@ -56,7 +57,9 @@ const Profile: React.FC = () => {
                 <ProfileCard
                   username={user?.username}
                   postCount={user && user.posts ? user.posts.length : 0}
+                  bio={user && user.bio}
                 />
+                <Form/>
               </div>
             </div>
           </div>

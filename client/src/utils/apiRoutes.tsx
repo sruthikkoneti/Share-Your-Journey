@@ -13,3 +13,5 @@
 
  export const upVote=`${host}/journey/up-vote/`
  export const downVote=`${host}/journey/down-vote/`
+
+ export const updateProfile=`${host}/user/update-profile`

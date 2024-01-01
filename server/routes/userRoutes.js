@@ -5,7 +5,7 @@ const router = Router();
 
 //Protected Routes
 router.get("/", auth,getUserInfo);
-router.patch("/update",auth,updateUserProfile)
+router.put("/update-profile",auth,updateUserProfile)
 
 
 export default router;
