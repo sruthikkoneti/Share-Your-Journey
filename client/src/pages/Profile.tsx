@@ -53,10 +53,12 @@ const Profile: React.FC = () => {
         <main className="container-fluid mx-0 grid grid-cols-5 screen h-screen sm:">
           <div className="col-span-1 mt-28">
             <div className="w-full top-28">
-              <ProfileCard
-                username={user?.username}
-                postCount={user && user.posts ? user.posts.length : 0}
-              />
+              <div className="fixed">
+                <ProfileCard
+                  username={user?.username}
+                  postCount={user && user.posts ? user.posts.length : 0}
+                />
+              </div>
             </div>
           </div>
           <div className="col-span-3 mt-28 px-28">
@@ -72,7 +74,9 @@ const Profile: React.FC = () => {
           </div>
           <div className="col-span-1 mt-28 lg:block md:block sm:hidden">
             <div className="w-full">
-              <Sidebar />
+              <div className="fixed">
+                <Sidebar />
+              </div>
             </div>
           </div>
           <div className="lg:hidden md:hidden sm:block">

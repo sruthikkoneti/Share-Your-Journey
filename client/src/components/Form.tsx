@@ -2,6 +2,7 @@ import React, { useState, ChangeEvent, FormEvent } from 'react';
 import axios from 'axios';
 import { newPost } from '../utils/apiRoutes';
 import { useNavigate } from 'react-router-dom';
+import { FiEdit, FiImage, FiMapPin } from 'react-icons/fi'; // Import icons from react-icons
 
 interface CreatePostData {
   title: string;
@@ -71,65 +72,63 @@ const Form: React.FC = () => {
   };
 
   return (
-    <div className="container mx-auto max-w-md p-4 border rounded-md shadow-lg bg-white">
-      <h2 className="text-2xl mb-4 text-center text-blue-600">Create Post</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label htmlFor="title" className="block mb-1 text-gray-700">
-            Title:
-          </label>
-          <input
-            type="text"
-            id="title"
-            name="title"
-            value={createPostData.title}
-            onChange={handleChange}
-            className="w-full border rounded-md px-3 py-2 focus:outline-none focus:border-blue-400"
-          />
-        </div>
-        <div>
-          <label htmlFor="caption" className="block mb-1 text-gray-700">
-            Caption:
-          </label>
-          <textarea
-            id="caption"
-            name="caption"
-            value={createPostData.caption}
-            onChange={handleChange}
-            className="w-full border rounded-md px-3 py-2 focus:outline-none focus:border-blue-400"
-          />
-        </div>
-        <div>
-          <label htmlFor="location" className="block mb-1 text-gray-700">
-            Location:
-          </label>
-          <input
-            type="text"
-            id="location"
-            name="location"
-            value={createPostData.location}
-            onChange={handleChange}
-            className="w-full border rounded-md px-3 py-2 focus:outline-none focus:border-blue-400"
-          />
-        </div>
-        <div>
-          <label htmlFor="photo" className="block mb-1 text-gray-700">
-            Upload Image:
-          </label>
-          <input
-            type="file"
-            id="photo"
-            name="photo"
-            accept="image/*"
-            onChange={handleImageChange}
-            className="w-full border rounded-md px-3 py-2 focus:outline-none focus:border-blue-400"
-          />
-        </div>
-        <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
-          Upload Post
-        </button>
-      </form>
+    <div className="flex justify-center ml-5">
+      <div className="max-w-md mx-auto bg-transparent shadow-md rounded-lg">
+        <h2 className="text-2xl mb-4 text-center text-purple-600">Create Post</h2>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="flex items-center border rounded-md px-3 py-2 focus:outline-none focus:border-purple-400 bg-transparent">
+            <FiEdit className="mr-2" />
+            <input
+              type="text"
+              id="title"
+              name="title"
+              value={createPostData.title}
+              onChange={handleChange}
+              placeholder="Title"
+              className="w-full focus:outline-none bg-transparent"
+            />
+          </div>
+          <div className="flex items-center border rounded-md px-3 py-2 focus:outline-none focus:border-purple-400 bg-transparent">
+            <FiEdit className="mr-2" />
+            <textarea
+              id="caption"
+              name="caption"
+              value={createPostData.caption}
+              onChange={handleChange}
+              placeholder="Caption"
+              className="w-full focus:outline-none bg-transparent"
+            />
+          </div>
+          <div className="flex items-center border rounded-md px-3 py-2 focus:outline-none focus:border-purple-400 bg-transparent">
+            <FiMapPin className="mr-2" />
+            <input
+              type="text"
+              id="location"
+              name="location"
+              value={createPostData.location}
+              onChange={handleChange}
+              placeholder="Location"
+              className="w-full focus:outline-none bg-transparent"
+            />
+          </div>
+          <div className="flex items-center border rounded-md px-3 py-2 focus:outline-none focus:border-purple-400 bg-transparent">
+            <FiImage className="mr-2" />
+            <input
+              type="file"
+              id="photo"
+              name="photo"
+              accept="image/*"
+              onChange={handleImageChange}
+              className="w-full focus:outline-none bg-transparent"
+            />
+          </div>
+          <button type="submit" className="bg-purple-500 text-white px-4 py-2 rounded-md hover:bg-purple-600">
+            Upload Post
+          </button>
+        </form>
+      </div>
     </div>
+
   );
 };
 

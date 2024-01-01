@@ -38,10 +38,16 @@ const Home: React.FC = () => {
         <>
             <div className="screen">
                 <Navbar />
-                <main className="container-fluid mx-0 grid grid-cols-5 screen h-screen sm:">
+                <main className="container-fluid mx-0 grid grid-cols-5 screen h-screen">
                     <div className="col-span-1 mt-28">
                         <div className="w-full top-28">
-
+                            <div className="fixed">
+                            <input
+                                    type="text"
+                                    placeholder="Search..."
+                                    className="w-full  mx-10 rounded-md border focus:outline-none focus:border-blue-500"
+                                />
+                            </div>
                         </div>
                     </div>
                     <div className="col-span-3 mt-28 px-28">
@@ -58,7 +64,9 @@ const Home: React.FC = () => {
                     </div>
                     <div className="col-span-1 mt-28 lg:block md:block sm:hidden">
                         <div className="w-full">
-                            <Sidebar/>
+                            <div className="fixed">
+                                <Sidebar />
+                            </div>
                         </div>
                     </div>
                     <div className="lg:hidden md:hidden sm:block">
