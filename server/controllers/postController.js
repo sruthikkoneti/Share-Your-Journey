@@ -7,10 +7,10 @@ export const createPost = async (req, res, next) => {
     try {
         const { title, caption, location } = req.body;
         const ownerId = req.user.user_id;
-
+        const lowerCaseLocation=location.toLowerCase()
         const photoUrl = `/file_uploads/${ownerId}/${req.file.filename}`;
 
-        const nominatimApiUrl = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(location)}`;
+        const nominatimApiUrl = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(lowerCaseLocation)}`;
 
         const nominatimResponse = await axios.get(nominatimApiUrl);
 
@@ -21,7 +21,7 @@ export const createPost = async (req, res, next) => {
                 title,
                 caption,
                 photo: photoUrl,
-                location,
+                location:lowerCaseLocation,
                 coordinateX: lat.toString(),
                 coordinateY: lon.toString(),
                 owner: ownerId
@@ -65,8 +65,8 @@ export const getAllPosts = async (req, res, next) => {
                     coordinateX: 1,
                     coordinateY: 1,
                     photo: 1,
-                    upVotes:1,
-                    downVotes:1,
+                    upVotes: 1,
+                    downVotes: 1,
                     "user.username": 1
                 }
             }
@@ -172,7 +172,20 @@ export const downVoteAPost = async (req, res) => {
 
         res.status(200).json(post);
     } catch (error) {
-        console.log(error)
+        res.status(500).json({ message: 'Server Error' });
+    }
+}
+
+export const getPostsByLocation = async (req, res) => {
+    try {
+        const locationQuery = req.query.location;
+        console.log(locationQuery)
+
+        // Find posts based on the provided location
+        const posts = await Post.find({ location: locationQuery }).exec();
+
+        res.json(posts);
+    } catch (error) {
         res.status(500).json({ message: 'Server Error' });
     }
 }
