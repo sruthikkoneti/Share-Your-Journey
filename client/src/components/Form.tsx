@@ -65,7 +65,7 @@ const Form: React.FC = () => {
         location: '',
       });
 
-      navigate('/');
+      navigate('/home');
     } catch (error) {
       console.error('Error creating post:', error);
     }
