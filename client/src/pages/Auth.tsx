@@ -61,7 +61,7 @@ const Auth = () => {
 
   return (
     <>
-      <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="min-h-screen flex items-center justify-center bg-gray-100 bg-gradient-to-r from-green-400 to-blue-500">
         <div className="bg-white p-8 rounded shadow-md w-full sm:w-1/2 lg:w-1/3">
           <h2 className="text-3xl mb-6 text-center font-semibold">
             {isRegistered ? 'Login' : 'Register'}

@@ -3,76 +3,76 @@ import { Link } from 'react-router-dom';
 
 const LandingPage: React.FC = () => {
   return (
-    <div className=""> {/* Adjust padding for larger screens */}
-      <nav className="bg-gradient-to-r from-blue-500 to-purple-500 text-white py-6">
-        <div className="container-fluid mx-auto flex flex-col lg:flex-row justify-between items-center lg:px-20">
-          <Link to="/" className="text-4xl font-bold mb-4 lg:mb-0 lg:mr-6">
-            ShareYourJourney
-          </Link>
+    <div className="">
+      <nav className="bg-white text-black py-6 lg:px-20 fixed w-full bg-opacity-75">
+        <div className="container mx-auto flex flex-col lg:flex-row justify-between items-center">
+          <div className="flex items-center">
+            <img src="logo.png" width="40" height="40" alt="" className="mr-2" />
+            <Link to="/" className="text-4xl font-bold mb-4 lg:mb-0 lg:mr-6">
+              ShareYourJourney
+            </Link>
+          </div>
           <div className="flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-4">
-            <Link to="/" className="hover:underline">
+            <a href="#about" className="hover:underline text-xl">
               About
-            </Link>
-            <Link to="/" className="hover:underline">
-              Features
-            </Link>
-            <Link to="/" className="hover:underline">
+            </a>
+            <a href="#about" className="hover:underline text-xl">
+              Why Us?
+            </a>
+            <a href="#contribute" className="hover:underline text-xl">
               Contribute
-            </Link>
-            <Link to="/" className="hover:underline">
-              Section 4
-            </Link>
-            <Link to="/auth" className="hover:underline">
+            </a>
+            <Link to="/auth" className="hover:underline text-xl">
               Sign Up
             </Link>
-            {/* Add more navbar links as needed */}
+            <a href="#contribute" className="hover:underline text-xl">
+              Contact Us
+            </a>
           </div>
         </div>
       </nav>
-
-      <main className="container-fluid mx-auto py-8">
-        <section className="bg-white py-8 min-h-50vh">
-          <div className="container mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-4">Section 1</h2>
-            <p className="text-lg text-center">
-              This is the first section with a white background.
-            </p>
+      <main className="container-fluid mx-auto">
+        <section id='about' className="bg-gradient-to-r from-green-400 to-blue-500 text-white py-16 min-h-screen flex flex-col items-center justify-center">
+          <div className="container mx-auto text-center">
+            <h2 className="text-7xl font-bold mb-8">Navigate Safely, Explore Confidently</h2>
+            <h3 className="text-6xl font-bold mb-8">Your Scam-Smart Travel Companion.</h3>
+            <Link to="/auth" className=" text-xl bg-white text-blue-500 py-5 px-7 rounded-full text-lg font-semibold hover:bg-blue-100 transition duration-300">Get Started</Link>
           </div>
         </section>
-
-        <section className="bg-gradient-to-r from-green-400 to-blue-500 text-white py-8 min-h-50vh">
+        <section className="bg-gray-100 py-8 min-h-50vh">
           <div className="container mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-4">Section 2</h2>
-            <p className="text-lg text-center">
-              This is the second section with a gradient background.
-            </p>
+            <h2 className="text-5xl font-bold text-center mb-4 text-gray-700">What are we made of?</h2>
+            <div className="flex justify-center items-center py-16">
+              <img src="Bun.svg" alt="" className="w-24 h-24 mx-4" />
+              <img src="JavaScript.svg" alt="" className="w-24 h-24 mx-4" />
+              <img src="vite.svg" alt="" className="w-24 h-24 mx-4" />
+              <img src="TypeScript.svg" alt="" className="w-24 h-24 mx-4" />
+              <img src="Express.svg" alt="" className="w-24 h-24 mx-4" />
+              <img src="MongoDB.svg" alt="" className="w-24 h-24 mx-4" />
+            </div>
           </div>
         </section>
-
-        <section className="bg-white py-8 min-h-50vh">
-          <div className="container mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-4">Section 3</h2>
-            <p className="text-lg text-center">
-              This is the third section with a white background.
-            </p>
+        <section id='contribute' className="bg-gray-100 py-8 min-h-50vh">
+          <div className="container mx-auto text-center">
+            <h2 className="text-5xl font-bold text-center mb-4 text-gray-700">Hey Developers</h2>
+            <div className="grid grid-cols-3 mx-auto">
+              <div className='col-span-1 flex justify-end'>
+                <img src="github.svg" width="400" height="400" alt="github" />
+              </div>
+              <div className='col-span-2 flex justify-start items-center'>
+                <div className="flex-col text-start pr-10">
+                  <p className='py-3 text-xl' >
+                    We are open source and you can contribute to this project on GitHub.
+                    We are using the GNU license so you can use this project for your own use as well.
+                  </p>
+                  <Link to="https://github.com/sruthikkoneti/Share-Your-Journey" className="bg-purple-800 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-block">
+                    View Repository
+                  </Link>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
-
-        <section className="bg-gradient-to-r from-yellow-400 to-red-500 text-white py-8 min-h-50vh">
-          <div className="container mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-4">Section 4</h2>
-            <p className="text-lg text-center">
-              This is the fourth section with a gradient background.
-              <img
-                width="375"
-                height="375"
-                src="https://img.icons8.com/3d-fluency/375/github.png"
-                alt="github"
-              />
-            </p>
-          </div>
-        </section>
-        {/* ... Additional sections */}
       </main>
     </div>
   );

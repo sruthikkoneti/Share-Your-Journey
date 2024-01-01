@@ -48,41 +48,37 @@ const Profile: React.FC = () => {
 
   return (
     <>
-      <div className="flex h-screen flex-col">
-        <div className="h-20"><Navbar /></div>
-        <div className="relative flex-1 overflow-y-auto">
-          <div className="lg:grid lg:grid-cols-5 gap-0 md:grid md:grid-cols-5 sm:flex sm:flex-col">
-            <div className="top-20 lg:col-span-1 md:col-span-1">
-              <div className="lg:fixed md:fixed lg:w-1/5 sm:w-full">
-                <ProfileCard
-                  username={user?.username}
-                  postCount={user && user.posts ? user.posts.length : 0}
-                />
-              </div>
-            </div>
-            <div className="lg:col-span-3 md:col-span-3">
-              {userPosts &&
-                userPosts.map((userPost) => (
-                  <Post
-                    key={userPost._id}
-                    title={userPost.title}
-                    photo={userPost.photo}
-                    caption={userPost.caption}
-                  />
-                ))}
-            </div>
-            <div className="third right-0 top-20 lg:col-span-1 md:col-span-1 hidden lg:block">
-              <div className="fixed w-1/5">
-                <Sidebar />
-              </div>
-            </div>
-            <div className="lg:hidden md:hidden bottom-0">
-              <div className="fixed w-1/5">
-                <BottomNavbar />
-              </div>
+      <div className="screen">
+        <Navbar />
+        <main className="container-fluid mx-0 grid grid-cols-5 screen h-screen sm:">
+          <div className="col-span-1 mt-28">
+            <div className="w-full top-28">
+              <ProfileCard
+                username={user?.username}
+                postCount={user && user.posts ? user.posts.length : 0}
+              />
             </div>
           </div>
-        </div>
+          <div className="col-span-3 mt-28 px-28">
+            {userPosts &&
+              userPosts.map((userPost) => (
+                <Post
+                  key={userPost._id}
+                  title={userPost.title}
+                  photo={userPost.photo}
+                  caption={userPost.caption}
+                />
+              ))}
+          </div>
+          <div className="col-span-1 mt-28 lg:block md:block sm:hidden">
+            <div className="w-full">
+              <Sidebar />
+            </div>
+          </div>
+          <div className="lg:hidden md:hidden sm:block">
+            <BottomNavbar />
+          </div>
+        </main>
       </div>
     </>
 

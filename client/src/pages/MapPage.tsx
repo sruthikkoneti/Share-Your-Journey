@@ -13,7 +13,7 @@ interface MapPost {
     location: string;
     coordinateX: string;
     coordinateY: string;
-    photo:string,
+    photo: string,
     user: {
         username: string;
     };
@@ -27,46 +27,42 @@ const MapPage = () => {
         const fetchMapPosts = async () => {
             try {
                 const response = await axios.get<MapPost[]>(getMapPosts, {
-                  headers: {
-                    Authorization: `Bearer ${token}`,
-                  },
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
                 })
                 console.log(response.data)
                 setMapPosts(response.data);
                 console.log(mapPosts)
-              } catch (error) {
+            } catch (error) {
                 console.log(error);
-              }
+            }
         };
 
         fetchMapPosts();
     }, []);
     return (
         <>
-            <div className="flex h-screen flex-col">
-                <div className="h-20"><Navbar /></div>
-                <div className="relative flex-1 overflow-y-auto">
-                    <div className="lg:grid lg:grid-cols-5 gap-0 md:grid md:grid-cols-5 sm:flex sm:flex-col">
-                        <div className="first top-20 col-span-1">
-                            <div className="fixed w-1/5">
+            <div className="screen">
+                <Navbar />
+                <main className="container-fluid mx-0 grid grid-cols-5 screen h-screen sm:">
+                    <div className="col-span-1 mt-28">
+                        <div className="w-full top-28">
 
-                            </div>
-                        </div>
-                        <div className="lg:col-span-3 md:col-span-3">
-                            <LeafletMap mapPosts={mapPosts} />
-                        </div>
-                        <div className="third right-0 top-20 lg:col-span-1 md:col-span-1 hidden lg:block">
-                            <div className="fixed w-1/5">
-                                <Sidebar />
-                            </div>
-                        </div>
-                        <div className="lg:hidden md:hidden bottom-0">
-                            <div className="fixed w-1/5">
-                                <BottomNavbar />
-                            </div>
                         </div>
                     </div>
-                </div>
+                    <div className="col-span-3 mt-28">
+                        <LeafletMap mapPosts={mapPosts} />
+                    </div>
+                    <div className="col-span-1 mt-28 lg:block md:block sm:hidden">
+                        <div className="w-full">
+                            <Sidebar />
+                        </div>
+                    </div>
+                    <div className="lg:hidden md:hidden sm:block">
+                        <BottomNavbar />
+                    </div>
+                </main>
             </div>
         </>
     )

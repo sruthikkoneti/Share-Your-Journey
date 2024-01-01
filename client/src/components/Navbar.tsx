@@ -9,11 +9,14 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-gradient-to-r from-blue-500 to-purple-500 text-white py-6 px-4 w-full fixed top-0 shadow-md cursor-pointer" onClick={scrollToTop}>
-      <div className="container mx-auto text-center">
-        <Link to="/home" className="text-2xl font-bold text-white text-center">
-          ShareYourJourney
-        </Link>
+    <nav className="bg-green text-white py-3 lg:py-6 lg:px-20 fixed w-full bg-gradient-to-r from-green-500 to-blue-500">
+      <div className="container mx-auto flex items-center justify-center">
+        <div className="flex items-center">
+          <img src="logo.png" width="40" height="40" alt="" className="mr-2" />
+          <Link to="/home" className="text-lg font-bold lg:text-3xl">
+            ShareYourJourney
+          </Link>
+        </div>
       </div>
     </nav>
   );

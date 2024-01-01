@@ -6,6 +6,7 @@ import Profile from './pages/Profile'
 import MapPage from './pages/MapPage'
 import Create from './pages/Create'
 import LandingPage from './pages/LandingPage'
+import Spam from './pages/spam'
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route path='/map' element={token ? <MapPage /> : <Auth />} />
           <Route path='/user' element={token ? <Profile /> : <Auth />} />
           <Route path='/create' element={token ? <Create /> : <Auth />} />
+          <Route path='/spam' element={<Spam/>} />
         </Routes>
       </BrowserRouter>
     </>
