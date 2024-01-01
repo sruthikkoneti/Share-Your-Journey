@@ -11,6 +11,7 @@ const UserSchema=new mongoose.Schema(
             type:String,
             required:true
         },
+        bio:String,
         posts: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: "Post"

@@ -10,3 +10,6 @@
  export const getMapPosts=`${host}/journey/map`
 
  export const newPost=`${host}/journey/create`
+
+ export const upVote=`${host}/journey/up-vote/`
+ export const downVote=`${host}/journey/down-vote/`

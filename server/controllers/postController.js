@@ -44,17 +44,41 @@ export const createPost = async (req, res, next) => {
 };
 export const getAllPosts = async (req, res, next) => {
     try {
-        const posts = await Post.find();
-        if (!posts) {
-            res.status(404).json({ "msg": "No posts found" })
-        }
-        res.status(201).json(posts);
+        const posts = await Post.aggregate([
+            {
+                $lookup: {
+                    from: "users",
+                    localField: "owner",
+                    foreignField: "_id",
+                    as: "user"
+                }
+            },
+            {
+                $unwind: "$user" // Deconstruct the user array
+            },
+            {
+                $project: {
+                    _id: 1,
+                    title: 1,
+                    caption: 1,
+                    location: 1,
+                    coordinateX: 1,
+                    coordinateY: 1,
+                    photo: 1,
+                    upVotes:1,
+                    downVotes:1,
+                    "user.username": 1
+                }
+            }
+        ]);
+
+        res.status(200).json(posts);
     } catch (ex) {
         next(ex);
     }
 };
 
-export const getPostsForMap = async (req, res,next) => {
+export const getPostsForMap = async (req, res, next) => {
     try {
         const posts = await Post.aggregate([
             {
@@ -76,8 +100,8 @@ export const getPostsForMap = async (req, res,next) => {
                     location: 1,
                     coordinateX: 1,
                     coordinateY: 1,
-                    photo:1,
-                    "user.username": 1 
+                    photo: 1,
+                    "user.username": 1
                 }
             }
         ]);
@@ -85,5 +109,70 @@ export const getPostsForMap = async (req, res,next) => {
         res.status(200).json(posts);
     } catch (ex) {
         next(ex);
+    }
+}
+
+
+export const upVoteAPost = async (req, res) => {
+    try {
+        const { postID } = req.params;
+        const post = await Post.findById(postID);
+        if (!post) {
+            return res.status(404).json({ message: 'Post not found' });
+        }
+
+        // Check if the user has already upvoted, remove the upvote if they have
+        const index = post.upVotes.indexOf(req.user.user_id);
+        if (index !== -1) {
+            post.upVotes.splice(index, 1);
+        } else {
+            // Add the user's ID to the upVotes array if they haven't upvoted before
+            post.upVotes.push(req.user.user_id);
+
+            // If the user has previously downvoted, remove the downvote
+            const downvoteIndex = post.downVotes.indexOf(req.user.user_id);
+            if (downvoteIndex !== -1) {
+                post.downVotes.splice(downvoteIndex, 1);
+            }
+        }
+
+        await post.save();
+
+        res.status(200).json(post);
+    } catch (error) {
+        res.status(500).json({ message: 'Server Error' });
+    }
+}
+
+export const downVoteAPost = async (req, res) => {
+    try {
+        const { postID } = req.params;
+        const post = await Post.findById(postID);
+
+        if (!post) {
+            return res.status(404).json({ message: 'Post not found' });
+        }
+
+        // Check if the user has already downvoted, remove the downvote if they have
+        const index = post.downVotes.indexOf(req.user.user_id);
+        if (index !== -1) {
+            post.downVotes.splice(index, 1);
+        } else {
+            // Add the user's ID to the downVotes array if they haven't downvoted before
+            post.downVotes.push(req.user.user_id);
+
+            // If the user has previously upvoted, remove the upvote
+            const upvoteIndex = post.upVotes.indexOf(req.user.user_id);
+            if (upvoteIndex !== -1) {
+                post.upVotes.splice(upvoteIndex, 1);
+            }
+        }
+
+        await post.save();
+
+        res.status(200).json(post);
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ message: 'Server Error' });
     }
 }

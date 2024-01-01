@@ -14,11 +14,10 @@ interface UserData {
 }
 
 interface PostData {
-  _id: string;
   title: string;
   photo: string;
   caption: string;
-
+  location: string;
 }
 
 const Profile: React.FC = () => {
@@ -69,6 +68,7 @@ const Profile: React.FC = () => {
                   title={userPost.title}
                   photo={userPost.photo}
                   caption={userPost.caption}
+                  location={userPost.location}
                 />
               ))}
           </div>

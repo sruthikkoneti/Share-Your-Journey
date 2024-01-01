@@ -7,10 +7,13 @@ import { getAllPosts } from '../utils/apiRoutes';
 import BottomNavbar from '../components/BottomNavbar';
 
 interface PostData {
-    _id: string;
     title: string;
     photo: string;
     caption: string;
+    location: string;
+    user: {
+      username: string;
+    };
 }
 
 const Home: React.FC = () => {
@@ -58,6 +61,8 @@ const Home: React.FC = () => {
                                     title={post.title}
                                     photo={post.photo}
                                     caption={post.caption}
+                                    location={post.location}
+                                    user={post.user}
                                 />
                             ))
                         }

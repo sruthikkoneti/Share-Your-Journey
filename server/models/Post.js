@@ -23,6 +23,14 @@ const PostSchema=new mongoose.Schema(
         coordinateY:{
             type:String
         },
+        upVotes:[{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
+        }],
+        downVotes:[{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
+        }],
         owner: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User"
