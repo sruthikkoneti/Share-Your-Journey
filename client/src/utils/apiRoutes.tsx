@@ -11,6 +11,8 @@
  
  export const getMapPosts=`${host}/journey/map`
 
+ export const getPostsByLocation=`${host}/journey/get-posts?location=`
+
  export const newPost=`${host}/journey/create`
 
  export const upVote=`${host}/journey/up-vote/`

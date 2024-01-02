@@ -1,12 +1,12 @@
-import { useState, useEffect, FormEvent } from 'react';
+import { useState, useEffect,FormEvent } from 'react';
 import axios from 'axios';
 import Navbar from '../components/Navbar';
 import Sidebar from '../components/Sidebar';
 import Post from '../components/Post';
-import { getAllPosts, getUserVotedPosts } from '../utils/apiRoutes';
+import {  getPostsByLocation, getUserVotedPosts } from '../utils/apiRoutes';
 import BottomNavbar from '../components/BottomNavbar';
 import { Types } from 'mongoose';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 interface UserVotedPosts {
     userUpVotedPosts?: Types.ObjectId[],
@@ -24,48 +24,50 @@ interface PostData {
     };
 }
 
-const Home: React.FC = () => {
+const Custom: React.FC = () => {
     const [user, setUser] = useState<UserVotedPosts | null>(null);
     const [posts, setPosts] = useState<PostData[]>([]);
     const token = localStorage.getItem('token');
+    const {location}=useParams()
 
     const navigate = useNavigate();
-    const [location, setLocation] = useState<string>('');
+    const [locationQuery, setLocationQuery] = useState<string>('');
 
     const handleSearch = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        navigate(`/search/${location}`);
-        setLocation('')
+        navigate(`/search/${locationQuery}`);
+        setLocationQuery('')
     };
 
     useEffect(() => {
-        const fetchUserVotedPosts = async () => {
-            try {
-                const response = await axios.get<UserVotedPosts>(getUserVotedPosts, {
+        const fetchUserVotedPosts=async()=>{
+            try{
+                const response= await axios.get<UserVotedPosts>(getUserVotedPosts,{
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
                 })
                 setUser(response.data)
-            } catch (error) {
+            }catch(error){
                 console.log(error)
             }
         }
-        const fetchPosts = async () => {
+        const fetchPostsByLocation = async () => {
             try {
-                const response = await axios.get<PostData[]>(getAllPosts, {
+                const response = await axios.get<PostData[]>(`${getPostsByLocation}${location}`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
                 });
+                console.log(response.data)
                 setPosts(response.data);
             } catch (error) {
                 console.log(error);
             }
         };
         fetchUserVotedPosts()
-        fetchPosts();
-    }, [token]);
+        fetchPostsByLocation();
+    }, [token,location]);
 
     return (
         <>
@@ -74,14 +76,14 @@ const Home: React.FC = () => {
                 <main className="container-fluid mx-0 grid grid-cols-5 screen h-screen">
                     <div className="col-span-1 mt-28">
                         <div className="w-full top-28">
-                            <div className="fixed">
+                        <div className="fixed">
                                 <form onSubmit={handleSearch}>
                                     <input
                                         type="text"
                                         placeholder="Search..."
                                         className="w-full mx-10 rounded-md border focus:outline-none focus:border-blue-500"
-                                        value={location}
-                                        onChange={(e) => setLocation(e.target.value)}
+                                        value={locationQuery}
+                                        onChange={(e) => setLocationQuery(e.target.value)}
                                     />
                                 </form>
                             </div>
@@ -103,6 +105,9 @@ const Home: React.FC = () => {
                                 />
                             ))
                         }
+                        {
+                            posts.length!==0? null : <div className='flex items-center pt-24 text-center h-full justify-center' >No Posts found for the given location :(</div>
+                        }
                     </div>
                     <div className="col-span-1 mt-28 lg:block md:block sm:hidden">
                         <div className="w-full">
@@ -120,4 +125,4 @@ const Home: React.FC = () => {
     );
 };
 
-export default Home;
+export default Custom;

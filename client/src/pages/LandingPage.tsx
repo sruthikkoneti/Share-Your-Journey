@@ -24,9 +24,9 @@ const LandingPage: React.FC = () => {
             <Link to="/auth" className="hover:underline text-xl">
               Sign Up
             </Link>
-            <a href="#contribute" className="hover:underline text-xl">
+            {/* <a href="#contribute" className="hover:underline text-xl">
               Contact Us
-            </a>
+            </a> */}
           </div>
         </div>
       </nav>
@@ -62,7 +62,6 @@ const LandingPage: React.FC = () => {
                 <div className="flex-col text-start pr-32">
                   <p className='py-3 text-xl' >
                     We are open source and you can contribute to this project on GitHub.
-                    We are using the GNU license so you can use this project for your own use as well.
                   </p>
                   <Link to="https://github.com/sruthikkoneti/Share-Your-Journey" className="bg-purple-800 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-block">
                     View Repository

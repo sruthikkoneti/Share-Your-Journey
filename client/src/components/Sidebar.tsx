@@ -25,11 +25,11 @@ const Sidebar: React.FC = () => {
                 <FiMap className="mr-2" /> Map View
               </Link>
             </li>
-            <li>
+            {/* <li>
               <Link to="/create" className="hover:text-blue-600 flex items-center">
                 <FiEdit className="mr-2" /> Create
               </Link>
-            </li>
+            </li> */}
             <li>
               <button onClick={handleLogout} className="hover:text-blue-600 flex items-center w-full text-left focus:outline-none">
                 <FiLogOut className="mr-2" /> Logout

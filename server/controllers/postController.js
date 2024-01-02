@@ -192,11 +192,39 @@ export const downVoteAPost = async (req, res) => {
 
 export const getPostsByLocation = async (req, res) => {
     try {
-        const locationQuery = req.query.location;
-        console.log(locationQuery)
+        const locationQuery = req.query.location.toLowerCase();
 
         // Find posts based on the provided location
-        const posts = await Post.find({ location: locationQuery }).exec();
+        const posts = await Post.aggregate([
+            {
+                $match: { location: locationQuery } // Match based on the provided location
+            },
+            {
+                $lookup: {
+                    from: "users",
+                    localField: "owner",
+                    foreignField: "_id",
+                    as: "user"
+                }
+            },
+            {
+                $unwind: "$user" // Deconstruct the user array
+            },
+            {
+                $project: {
+                    _id: 1,
+                    title: 1,
+                    caption: 1,
+                    location: 1,
+                    coordinateX: 1,
+                    coordinateY: 1,
+                    photo: 1,
+                    upVotes: 1,
+                    downVotes: 1,
+                    "user.username": 1
+                }
+            }
+        ]);
 
         res.json(posts);
     } catch (error) {

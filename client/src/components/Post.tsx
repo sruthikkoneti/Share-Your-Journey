@@ -74,6 +74,11 @@ const Post: React.FC<PostProps> = ({ postID, title, photo, caption, location, us
       }
     }
   };
+  const capitalizeWords = (input: string) => {
+    return input
+      .toLowerCase()
+      .replace(/(^|\s)\S/g, (letter) => letter.toUpperCase());
+  };
 
   useEffect(() => {
     setUpvoted(userUpVotedPosts.includes(postID));
@@ -86,7 +91,7 @@ const Post: React.FC<PostProps> = ({ postID, title, photo, caption, location, us
       <div>{caption}</div>
       <div className="mt-2 flex items-center">
         <FaMapMarkerAlt className="mr-2" />
-        <span>{location}</span>
+        <span>{capitalizeWords(location)}</span>
       </div>
       {user && (
         <div>
