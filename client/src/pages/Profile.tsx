@@ -39,7 +39,6 @@ const Profile: React.FC = () => {
             Authorization: `Bearer ${token}`,
           },
         })
-        console.log(response.data)
         setUser(response.data);
         setUserPosts(response.data.posts)
       } catch (error) {
