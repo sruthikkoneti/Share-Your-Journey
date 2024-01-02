@@ -20,6 +20,9 @@
 
 ***Make Sure to set the environment varibales to use the application locally***
 
+```.env``` in the backend should contain
+```DB_URL``` ```JWT_SECRET``` ```PORT```
+
 
 
 
