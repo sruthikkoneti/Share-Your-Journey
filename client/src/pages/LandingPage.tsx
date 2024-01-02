@@ -99,13 +99,13 @@ const LandingPage: React.FC = () => {
             <a href="https://github.com/sruthikkoneti" target='_blank' className="text-gray-500 hover:text-blue-300">
               <FaGithub />
             </a>
-            <a href="#" className="text-gray-500 hover:text-blue-300">
+            <a href="https://twitter.com/sruthik042" className="text-gray-500 hover:text-blue-300">
               <FaTwitter />
             </a>
-            <a href="#" className="text-gray-500 hover:text-blue-300">
+            <a href="https://www.instagram.com/sruthik042" className="text-gray-500 hover:text-blue-300">
               <FaInstagram />
             </a>
-            <a href="#" className="text-gray-500 hover:text-blue-300">
+            <a href="https://www.linkedin.com/in/sruthik-koneti/" className="text-gray-500 hover:text-blue-300">
               <FaLinkedin />
             </a>
           </div>
