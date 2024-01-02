@@ -7,15 +7,18 @@ import ProfileCard from '../components/ProfileCard';
 import Sidebar from '../components/Sidebar';
 import BottomNavbar from '../components/BottomNavbar';
 import Form from '../components/Form';
+import {Types} from 'mongoose'
 
 interface UserData {
   username: string;
   posts: PostData[];
-  bio?:string
-
+  bio?:string;
+  userUpVotedPosts?:Types.ObjectId[],
+  userDownVotedPosts?:Types.ObjectId[],
 }
 
 interface PostData {
+  _id:Types.ObjectId,
   title: string;
   photo: string;
   caption: string;
@@ -36,6 +39,7 @@ const Profile: React.FC = () => {
             Authorization: `Bearer ${token}`,
           },
         })
+        console.log(response.data)
         setUser(response.data);
         setUserPosts(response.data.posts)
       } catch (error) {
@@ -65,13 +69,16 @@ const Profile: React.FC = () => {
           </div>
           <div className="col-span-3 mt-28 px-28">
             {userPosts &&
-              userPosts.map((userPost) => (
+              userPosts.map((userPost,index) => (
                 <Post
-                  key={userPost._id}
+                  key={index}
                   title={userPost.title}
                   photo={userPost.photo}
                   caption={userPost.caption}
                   location={userPost.location}
+                  postID={userPost._id}
+                  userUpVotedPosts={user?.userUpVotedPosts}
+                  userDownVotedPosts={user?.userDownVotedPosts}
                 />
               ))}
           </div>

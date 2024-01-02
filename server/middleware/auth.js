@@ -12,7 +12,7 @@ export const auth = async (req, res, next) => {
 
     jwt.verify(token, process.env.JWT_SECRET, (err, decodedData) => {
         if (err) {
-            return res.status(401).json({ msg: `Unauthorized: ${err.message}` })
+            return res.status(401).json({ msg: `Unauthorized: ${err.message}`})
         }
         req.user = decodedData;
         next();

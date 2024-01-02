@@ -15,6 +15,14 @@ const UserSchema=new mongoose.Schema(
         posts: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: "Post"
+        }],
+        userUpVotedPosts: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Post"
+        }],
+        userDownVotedPosts: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Post"
         }]
     }
 )

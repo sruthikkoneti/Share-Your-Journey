@@ -36,7 +36,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ username, postCount, bio }) =
     }
   };
   return (
-    <div className="bg-white shadow-md rounded-lg p-6 mx-5">
+    <div className="bg-white shadow-md rounded-lg p-6  ml-5 mb-5">
       <h2 className="text-2xl text-black font-semibold mb-2">{username}</h2>
       <p className="text-gray-600">{bio && bio}</p>
       <p className="text-gray-600">Number of Posts: {postCount}</p>

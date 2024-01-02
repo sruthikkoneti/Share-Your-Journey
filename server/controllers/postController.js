@@ -121,10 +121,16 @@ export const upVoteAPost = async (req, res) => {
             return res.status(404).json({ message: 'Post not found' });
         }
 
+        const user = await User.findById(req.user.user_id);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
         // Check if the user has already upvoted, remove the upvote if they have
         const index = post.upVotes.indexOf(req.user.user_id);
         if (index !== -1) {
             post.upVotes.splice(index, 1);
+            user.userUpVotedPosts.pull(postID);
         } else {
             // Add the user's ID to the upVotes array if they haven't upvoted before
             post.upVotes.push(req.user.user_id);
@@ -134,9 +140,10 @@ export const upVoteAPost = async (req, res) => {
             if (downvoteIndex !== -1) {
                 post.downVotes.splice(downvoteIndex, 1);
             }
+            user.userUpVotedPosts.push(postID);
         }
 
-        await post.save();
+        await Promise.all([post.save(), user.save()]);
 
         res.status(200).json(post);
     } catch (error) {
@@ -153,10 +160,16 @@ export const downVoteAPost = async (req, res) => {
             return res.status(404).json({ message: 'Post not found' });
         }
 
+        const user = await User.findById(req.user.user_id);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
         // Check if the user has already downvoted, remove the downvote if they have
         const index = post.downVotes.indexOf(req.user.user_id);
         if (index !== -1) {
             post.downVotes.splice(index, 1);
+            user.userDownVotedPosts.pull(postID);
         } else {
             // Add the user's ID to the downVotes array if they haven't downvoted before
             post.downVotes.push(req.user.user_id);
@@ -166,9 +179,10 @@ export const downVoteAPost = async (req, res) => {
             if (upvoteIndex !== -1) {
                 post.upVotes.splice(upvoteIndex, 1);
             }
+            user.userDownVotedPosts.push(postID);
         }
 
-        await post.save();
+        await Promise.all([post.save(), user.save()]);
 
         res.status(200).json(post);
     } catch (error) {

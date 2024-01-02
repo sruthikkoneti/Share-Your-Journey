@@ -72,10 +72,10 @@ const Form: React.FC = () => {
   };
 
   return (
-    <div className="flex justify-center ml-5">
-      <div className="max-w-md mx-auto bg-transparent shadow-md rounded-lg">
+    <div className="flex justify-center ml-5 p-1">
+      <div className="max-w-md mx-auto bg-white shadow-md rounded-lg">
         <h2 className="text-2xl mb-4 text-center text-purple-600">Create Post</h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4 mx-1">
           <div className="flex items-center border rounded-md px-3 py-2 focus:outline-none focus:border-purple-400 bg-transparent">
             <FiEdit className="mr-2" />
             <input
@@ -122,7 +122,7 @@ const Form: React.FC = () => {
               className="w-full focus:outline-none bg-transparent"
             />
           </div>
-          <button type="submit" className="bg-purple-500 text-white px-4 py-2 rounded-md hover:bg-purple-600">
+          <button type="submit" className="bg-purple-500 text-white px-4 rounded-md hover:bg-purple-600">
             Upload Post
           </button>
         </form>

@@ -28,3 +28,21 @@ export const updateUserProfile = async (req, res, next) => {
   }
 };
 
+export const getUserVotedPosts=async(req,res)=>{
+  try{
+    const userId = req.user.user_id;
+
+    const user = await User.findById(userId).populate('userUpVotedPosts').populate('userDownVotedPosts');
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const userUpVotedPosts = user.userUpVotedPosts.map(post => post._id);
+    const userDownVotedPosts = user.userDownVotedPosts.map(post => post._id);
+
+    res.status(200).json({ userUpVotedPosts, userDownVotedPosts });
+  }catch(error){
+
+  }
+}

@@ -3,24 +3,44 @@ import axios from 'axios';
 import Navbar from '../components/Navbar';
 import Sidebar from '../components/Sidebar';
 import Post from '../components/Post';
-import { getAllPosts } from '../utils/apiRoutes';
+import { getAllPosts, getUserVotedPosts } from '../utils/apiRoutes';
 import BottomNavbar from '../components/BottomNavbar';
+import { Types } from 'mongoose';
+
+interface UserVotedPosts {
+    userUpVotedPosts?: Types.ObjectId[],
+    userDownVotedPosts?: Types.ObjectId[],
+}
 
 interface PostData {
+    _id: Types.ObjectId,
     title: string;
     photo: string;
     caption: string;
     location: string;
     user: {
-      username: string;
+        username: string;
     };
 }
 
 const Home: React.FC = () => {
+    const [user, setUser] = useState<UserVotedPosts | null>(null);
     const [posts, setPosts] = useState<PostData[]>([]);
     const token = localStorage.getItem('token');
 
     useEffect(() => {
+        const fetchUserVotedPosts=async()=>{
+            try{
+                const response= await axios.get<UserVotedPosts>(getUserVotedPosts,{
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                })
+                setUser(response.data)
+            }catch(error){
+                console.log(error)
+            }
+        }
         const fetchPosts = async () => {
             try {
                 const response = await axios.get<PostData[]>(getAllPosts, {
@@ -33,7 +53,7 @@ const Home: React.FC = () => {
                 console.log(error);
             }
         };
-
+        fetchUserVotedPosts()
         fetchPosts();
     }, [token]);
 
@@ -45,7 +65,7 @@ const Home: React.FC = () => {
                     <div className="col-span-1 mt-28">
                         <div className="w-full top-28">
                             <div className="fixed">
-                            <input
+                                <input
                                     type="text"
                                     placeholder="Search..."
                                     className="w-full  mx-10 rounded-md border focus:outline-none focus:border-blue-500"
@@ -54,7 +74,7 @@ const Home: React.FC = () => {
                         </div>
                     </div>
                     <div className="col-span-3 mt-28 px-28">
-                        {posts &&
+                        {(posts && user) &&
                             posts.map((post) => (
                                 <Post
                                     key={post._id}
@@ -62,7 +82,10 @@ const Home: React.FC = () => {
                                     photo={post.photo}
                                     caption={post.caption}
                                     location={post.location}
+                                    postID={post._id}
                                     user={post.user}
+                                    userUpVotedPosts={user?.userUpVotedPosts}
+                                    userDownVotedPosts={user?.userDownVotedPosts}
                                 />
                             ))
                         }
