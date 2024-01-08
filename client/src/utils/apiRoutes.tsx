@@ -1,4 +1,4 @@
- const host:string='http://localhost:5000/api'
+ const host:string=import.meta.env.VITE_HOST_URL
 
  export const registerRoute=`${host}/auth/register`
  export const loginRoute=`${host}/auth/login`
