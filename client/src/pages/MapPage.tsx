@@ -1,7 +1,6 @@
 import Navbar from '../components/Navbar'
 import Sidebar from '../components/Sidebar'
 import BottomNavbar from '../components/BottomNavbar'
-// import GoogleMapp from '../components/GoogleMap'
 import LeafletMap from '../components/LeafletMap'
 import { useState, useEffect } from 'react'
 import axios from 'axios'

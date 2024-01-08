@@ -7,18 +7,18 @@ import ProfileCard from '../components/ProfileCard';
 import Sidebar from '../components/Sidebar';
 import BottomNavbar from '../components/BottomNavbar';
 import Form from '../components/Form';
-import {Types} from 'mongoose'
+import { Types } from 'mongoose'
 
 interface UserData {
   username: string;
   posts: PostData[];
-  bio?:string;
-  userUpVotedPosts?:Types.ObjectId[],
-  userDownVotedPosts?:Types.ObjectId[],
+  bio?: string;
+  userUpVotedPosts?: Types.ObjectId[],
+  userDownVotedPosts?: Types.ObjectId[],
 }
 
 interface PostData {
-  _id:Types.ObjectId,
+  _id: Types.ObjectId,
   title: string;
   photo: string;
   caption: string;
@@ -57,18 +57,20 @@ const Profile: React.FC = () => {
           <div className="col-span-1 mt-28">
             <div className="w-full top-28">
               <div className="fixed">
-                <ProfileCard
-                  username={user?.username}
-                  postCount={user && user.posts ? user.posts.length : 0}
-                  bio={user && user.bio}
-                />
-                <Form/>
+                {user && (
+                  <ProfileCard
+                    username={user.username}
+                    postCount={user.posts.length}
+                    bio={user.bio || ''}
+                  />
+                )}
+                <Form />
               </div>
             </div>
           </div>
           <div className="col-span-3 mt-28 px-28">
             {userPosts &&
-              userPosts.map((userPost,index) => (
+              userPosts.map((userPost, index) => (
                 <Post
                   key={index}
                   title={userPost.title}
@@ -76,8 +78,8 @@ const Profile: React.FC = () => {
                   caption={userPost.caption}
                   location={userPost.location}
                   postID={userPost._id}
-                  userUpVotedPosts={user?.userUpVotedPosts}
-                  userDownVotedPosts={user?.userDownVotedPosts}
+                  userUpVotedPosts={user?.userUpVotedPosts ?? []}
+                  userDownVotedPosts={user?.userDownVotedPosts ?? []}
                   isDeletePage={true}
                 />
               ))}
