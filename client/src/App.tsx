@@ -6,6 +6,8 @@ import Profile from './pages/Profile'
 import MapPage from './pages/MapPage'
 import Create from './pages/Create'
 import LandingPage from './pages/LandingPage'
+import Custom from './pages/Custom'
+
 
 function App() {
 
