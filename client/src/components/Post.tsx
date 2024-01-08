@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaMapMarkerAlt, FaThumbsUp, FaThumbsDown } from 'react-icons/fa';
 import axios from 'axios';
-import { downVote, upVote } from '../utils/apiRoutes';
+import { downVote, upVote , deletePost} from '../utils/apiRoutes';
 import { Types } from 'mongoose';
 
 interface PostProps {
@@ -86,10 +86,11 @@ const Post: React.FC<PostProps> = ({ postID, title, photo, caption, location, us
       .replace(/(^|\s)\S/g, (letter) => letter.toUpperCase());
   };
 
-  const deletePost = async () => {
+  const handleDeletePost = async () => {
     try {
-
-      await axios.delete(`YOUR_DELETE_POST_ENDPOINT/${postID}`, config);
+      const deleteURL=`${deletePost}`
+      deletePost
+      await axios.delete(`${deleteURL}${postID}`, config);
 
     } catch (error) {
       console.error('Error deleting post:', error);
@@ -129,7 +130,7 @@ const Post: React.FC<PostProps> = ({ postID, title, photo, caption, location, us
         {
           isDeletePage && <button
           className="bg-purple-500 text-white px-4 py-2 rounded-md mt-4 hover:bg-purple-600"
-          onClick={deletePost}
+          onClick={handleDeletePost}
         >
           Delete Post
         </button>

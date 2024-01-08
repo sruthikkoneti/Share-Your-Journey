@@ -14,6 +14,7 @@
  export const getPostsByLocation=`${host}/journey/get-posts?location=`
 
  export const newPost=`${host}/journey/create`
+ export const deletePost=`${host}/journey/delete-post/`
 
  export const upVote=`${host}/journey/up-vote/`
  export const downVote=`${host}/journey/down-vote/`
