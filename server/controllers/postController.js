@@ -2,12 +2,14 @@ import Post from "../models/Post.js"
 import fs from 'fs/promises';
 import User from "../models/User.js";
 import axios from "axios";
+import fsExtra from 'fs-extra';
+import path from "path";
 
 export const createPost = async (req, res, next) => {
     try {
         const { title, caption, location } = req.body;
         const ownerId = req.user.user_id;
-        const lowerCaseLocation=location.toLowerCase()
+        const lowerCaseLocation = location.toLowerCase()
         const photoUrl = `/file_uploads/${ownerId}/${req.file.filename}`;
 
         const nominatimApiUrl = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(lowerCaseLocation)}`;
@@ -21,7 +23,7 @@ export const createPost = async (req, res, next) => {
                 title,
                 caption,
                 photo: photoUrl,
-                location:lowerCaseLocation,
+                location: lowerCaseLocation,
                 coordinateX: lat.toString(),
                 coordinateY: lon.toString(),
                 owner: ownerId
@@ -231,3 +233,32 @@ export const getPostsByLocation = async (req, res) => {
         res.status(500).json({ message: 'Server Error' });
     }
 }
+
+
+export const deletePost = async (req, res) => {
+    try {
+        const { postID } = req.params;
+
+        const post = await Post.findById(postID);
+
+        if (!post) {
+            return res.status(404).json({ message: 'Post not found' });
+        }
+
+        const photoPath = path.join(__dirname, '..', post.photo);
+        await fsExtra.unlink(photoPath);
+
+        const user = await User.findOneAndUpdate(
+            { _id: post.owner },
+            { $pull: { posts: postID } }
+        );
+
+        await Post.findByIdAndDelete(postID);
+
+        res.status(200).json({ message: 'Post deleted successfully' });
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ message: 'Server Error' });
+    }
+};
+
