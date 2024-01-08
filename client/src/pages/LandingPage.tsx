@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedin, FaGithub } from 'react-icons/fa';
-import ContactUs from '../components/ContactUsForm';
+import { FaTwitter, FaInstagram, FaLinkedin, FaGithub } from 'react-icons/fa';
 
 const LandingPage: React.FC = () => {
   return (
@@ -24,9 +23,6 @@ const LandingPage: React.FC = () => {
             <Link to="/auth" className="hover:underline text-xl">
               Sign Up
             </Link>
-            {/* <a href="#contribute" className="hover:underline text-xl">
-              Contact Us
-            </a> */}
           </div>
         </div>
       </nav>
@@ -74,14 +70,6 @@ const LandingPage: React.FC = () => {
             </div>
           </div>
         </section>
-        {/* <section id='contribute' className="bg-gray-100 py-8 min-h-50vh">
-          <div className="container mx-auto text-center">
-            <h2 className="text-5xl font-bold text-center mb-4 text-gray-700">Contact Us</h2>
-            <div className="flex justify-center">
-              <ContactUs />
-            </div>
-          </div>
-        </section> */}
       </main>
       <footer className="bg-gradient-to-t from-gray-100 to-gray-100 text-gray-700 py-8 text-center">
         <div className="h-16" /> {/* Spacer for increased height */}
