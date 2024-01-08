@@ -78,6 +78,7 @@ const Profile: React.FC = () => {
                   postID={userPost._id}
                   userUpVotedPosts={user?.userUpVotedPosts}
                   userDownVotedPosts={user?.userDownVotedPosts}
+                  isDeletePage={true}
                 />
               ))}
           </div>

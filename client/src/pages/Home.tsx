@@ -100,6 +100,7 @@ const Home: React.FC = () => {
                                     user={post.user}
                                     userUpVotedPosts={user?.userUpVotedPosts}
                                     userDownVotedPosts={user?.userDownVotedPosts}
+                                    isDeletePage={false}
                                 />
                             ))
                         }

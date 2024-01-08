@@ -15,17 +15,19 @@ interface PostProps {
   };
   userUpVotedPosts: Types.ObjectId[];
   userDownVotedPosts: Types.ObjectId[];
+  isDeletePage:boolean
 }
 
-const Post: React.FC<PostProps> = ({ postID, title, photo, caption, location, user, userUpVotedPosts, userDownVotedPosts, }) => {
+const Post: React.FC<PostProps> = ({ postID, title, photo, caption, location, user, userUpVotedPosts, userDownVotedPosts, isDeletePage}) => {
   const postId = postID;
   const userUpVotedArray:Types.ObjectId[]=userUpVotedPosts
   const userDownVotedArray:Types.ObjectId[]=userDownVotedPosts
   const upBool:Boolean=userUpVotedArray.includes(postId)
   const downBool:Boolean=userDownVotedArray.includes(postId)
+  const [upVotesCount, setUpVotesCount] = useState(userUpVotedPosts.length);
+  const [downVotesCount, setDownVotesCount] = useState(userDownVotedPosts.length);
   const [upvoted, setUpvoted] = useState(upBool);
   const [downvoted, setDownvoted] = useState(downBool);
-
   const token = localStorage.getItem('token');
   const config = {
     headers: {
@@ -40,7 +42,8 @@ const Post: React.FC<PostProps> = ({ postID, title, photo, caption, location, us
       try {
         await axios.put(upVoteURL, {}, config);
         setUpvoted(true);
-        setDownvoted(false);
+        setDownvoted(false)
+        setUpVotesCount(upVotesCount + 1);;
       } catch (error) {
         console.error('Error upvoting:', error);
       }
@@ -48,6 +51,7 @@ const Post: React.FC<PostProps> = ({ postID, title, photo, caption, location, us
       try {
         await axios.put(upVoteURL, {}, config);
         setUpvoted(false);
+        setUpVotesCount(upVotesCount - 1);
       } catch (error) {
         console.error('Error resetting upvote:', error);
       }
@@ -62,6 +66,7 @@ const Post: React.FC<PostProps> = ({ postID, title, photo, caption, location, us
         await axios.put(downVoteURL, {}, config);
         setDownvoted(true);
         setUpvoted(false);
+        setDownVotesCount(downVotesCount + 1);
       } catch (error) {
         console.error('Error downvoting:', error);
       }
@@ -69,6 +74,7 @@ const Post: React.FC<PostProps> = ({ postID, title, photo, caption, location, us
       try {
         await axios.put(downVoteURL, {}, config);
         setDownvoted(false);
+        setDownVotesCount(downVotesCount - 1);
       } catch (error) {
         console.error('Error resetting downvote:', error);
       }
@@ -80,6 +86,15 @@ const Post: React.FC<PostProps> = ({ postID, title, photo, caption, location, us
       .replace(/(^|\s)\S/g, (letter) => letter.toUpperCase());
   };
 
+  const deletePost = async () => {
+    try {
+
+      await axios.delete(`YOUR_DELETE_POST_ENDPOINT/${postID}`, config);
+
+    } catch (error) {
+      console.error('Error deleting post:', error);
+    }
+  };
   useEffect(() => {
     setUpvoted(userUpVotedPosts.includes(postID));
   }, [userUpVotedPosts, postID]);
@@ -103,11 +118,24 @@ const Post: React.FC<PostProps> = ({ postID, title, photo, caption, location, us
           className={`mr-2 cursor-pointer ${upvoted ? 'text-green-500' : ''}`}
           onClick={handleUpVote}
         />
+        <span className="mr-2">{upVotesCount}</span> 
         <FaThumbsDown
           className={`mr-2 cursor-pointer ${downvoted ? 'text-red-500' : ''}`}
           onClick={handleDownVote}
         />
+        <span>{downVotesCount}</span>
       </div>
+      <div className='text-right m-0'>
+        {
+          isDeletePage && <button
+          className="bg-purple-500 text-white px-4 py-2 rounded-md mt-4 hover:bg-purple-600"
+          onClick={deletePost}
+        >
+          Delete Post
+        </button>
+        }
+      </div>
+
     </div>
   );
 };
