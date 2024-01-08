@@ -93,15 +93,16 @@ const Custom: React.FC = () => {
                         {(posts && user) &&
                             posts.map((post) => (
                                 <Post
-                                    key={post._id}
+                                    key={String(post._id)}
                                     title={post.title}
                                     photo={post.photo}
                                     caption={post.caption}
                                     location={post.location}
                                     postID={post._id}
                                     user={post.user}
-                                    userUpVotedPosts={user?.userUpVotedPosts}
-                                    userDownVotedPosts={user?.userDownVotedPosts}
+                                    userUpVotedPosts={user?.userUpVotedPosts ?? []}
+                                    userDownVotedPosts={user?.userDownVotedPosts ?? []}
+                                    isDeletePage={false}
                                 />
                             ))
                         }

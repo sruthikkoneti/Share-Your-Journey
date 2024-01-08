@@ -4,7 +4,6 @@ import Auth from './pages/Auth'
 import Home from './pages/Home'
 import Profile from './pages/Profile'
 import MapPage from './pages/MapPage'
-import Create from './pages/Create'
 import LandingPage from './pages/LandingPage'
 import Custom from './pages/Custom'
 
@@ -22,7 +21,6 @@ function App() {
           <Route path='/home' element={token ? <Home /> : <Auth />} />
           <Route path='/map' element={token ? <MapPage /> : <Auth />} />
           <Route path='/user' element={token ? <Profile /> : <Auth />} />
-          <Route path='/create' element={token ? <Create /> : <Auth />} />
           <Route path='/search/:location' element={<Custom />} />
         </Routes>
       </BrowserRouter>
