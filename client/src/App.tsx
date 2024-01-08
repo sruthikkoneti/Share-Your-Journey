@@ -7,7 +7,8 @@ import MapPage from './pages/MapPage'
 import Create from './pages/Create'
 import LandingPage from './pages/LandingPage'
 import Custom from './pages/Custom'
-import Spam from './pages/spam'
+import LandingNav from './components/LandingNav'
+
 
 
 function App() {
@@ -19,13 +20,14 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/auth' element={<Auth />} />
-          <Route path='/' element={<LandingPage/>} />
+          <Route path='/' element={<LandingPage />} />
           <Route path='/home' element={token ? <Home /> : <Auth />} />
           <Route path='/map' element={token ? <MapPage /> : <Auth />} />
           <Route path='/user' element={token ? <Profile /> : <Auth />} />
           <Route path='/create' element={token ? <Create /> : <Auth />} />
-          <Route path='/spam' element={<Spam/>} />
-          <Route path='/search/:location' element={<Custom/>} />
+          <Route path='/search/:location' element={<Custom />} />
+          <Route path='/mobile' element={<LandingNav/>} />
+
         </Routes>
       </BrowserRouter>
     </>
