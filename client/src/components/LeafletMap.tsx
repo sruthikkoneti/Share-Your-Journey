@@ -70,7 +70,7 @@ const LeafletMap: React.FC<LeafletMapProps> = ({ mapPosts }) => {
                             </Marker>
                             <ImageOverlay
                                 key={index}
-                                url={`http://localhost:5000${post.photo}`} // Replace with your image URL from post.photo
+                                url={`${import.meta.env.VITE_HOST_URL}${post.photo}`} // Replace with your image URL from post.photo
                                 bounds={[
                                     [+post.coordinateX, +post.coordinateY], // Southwest coordinates of the image bounds
                                     [+post.coordinateX + 0.1, +post.coordinateY + 0.1], // Northeast coordinates of the image bounds (adjust this based on your image size)
