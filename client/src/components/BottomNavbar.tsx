@@ -29,11 +29,6 @@ const BottomNavbar: React.FC = () => {
           </Link>
         </li>
         <li>
-          <a href="#" className="flex flex-col items-center text-xl">
-            <FaSearch />
-          </a>
-        </li>
-        <li>
           <button onClick={handleLogout} className="flex flex-col items-center text-xl">
             <FaSignOutAlt />
           </button>

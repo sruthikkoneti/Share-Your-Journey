@@ -71,7 +71,7 @@ const Home: React.FC = () => {
         <>
             <div className="screen">
                 <Navbar />
-                <main className="container-fluid mx-0 grid grid-cols-5 screen h-screen">
+                <main className="container-fluid mx-0 grid grid-cols-5 screen h-screen sm:flex-col">
                     <div className="col-span-1 mt-28">
                         <div className="w-full top-28">
                             <div className="fixed">
@@ -87,7 +87,7 @@ const Home: React.FC = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="col-span-3 mt-28 px-28">
+                    <div className="lg:hidden md:hidden col-span-5 mt-31 lg:mt-28 md:mt-28">
                         {(posts && user) &&
                             posts.map((post) => (
                                 <Post
@@ -105,9 +105,27 @@ const Home: React.FC = () => {
                             ))
                         }
                     </div>
+                    <div className="lg:col-span-3 lg:mt-28 lg:px-28 hidden lg:block">
+                        {posts &&
+                            user &&
+                            posts.map((post) => (
+                                <Post
+                                    key={String(post._id)}
+                                    title={post.title}
+                                    photo={post.photo}
+                                    caption={post.caption}
+                                    location={post.location}
+                                    postID={post._id}
+                                    user={post.user}
+                                    userUpVotedPosts={user?.userUpVotedPosts ?? []}
+                                    userDownVotedPosts={user?.userDownVotedPosts ?? []}
+                                    isDeletePage={false}
+                                />
+                            ))}
+                    </div>
                     <div className="col-span-1 mt-28 lg:block md:block sm:hidden">
                         <div className="w-full">
-                            <div className="fixed">
+                            <div className="fixed lg:block md:block hidden">
                                 <Sidebar />
                             </div>
                         </div>

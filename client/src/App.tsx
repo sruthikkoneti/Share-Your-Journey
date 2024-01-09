@@ -6,7 +6,7 @@ import Profile from './pages/Profile'
 import MapPage from './pages/MapPage'
 import LandingPage from './pages/LandingPage'
 import Custom from './pages/Custom'
-
+import CreatePage from './pages/CreatePage'
 
 function App() {
 
@@ -22,6 +22,7 @@ function App() {
           <Route path='/map' element={token ? <MapPage /> : <Auth />} />
           <Route path='/user' element={token ? <Profile /> : <Auth />} />
           <Route path='/search/:location' element={<Custom />} />
+          <Route path='/create' element={<CreatePage/>} />
         </Routes>
       </BrowserRouter>
     </>

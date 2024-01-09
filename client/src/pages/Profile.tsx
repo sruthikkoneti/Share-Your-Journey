@@ -53,8 +53,8 @@ const Profile: React.FC = () => {
     <>
       <div className="screen">
         <Navbar />
-        <main className="container-fluid mx-0 grid grid-cols-5 screen h-screen sm:">
-          <div className="col-span-1 mt-28">
+        <main className="container-fluid mx-0 grid grid-cols-5 screen h-screen sm:flex-col">
+          <div className="col-span-1 mt-28 mb-2">
             <div className="w-full top-28">
               <div className="fixed">
                 {user && (
@@ -64,11 +64,13 @@ const Profile: React.FC = () => {
                     bio={user.bio || ''}
                   />
                 )}
-                <Form />
+                <div className="hidden lg:block md:block">
+                  <Form />
+                </div>
               </div>
             </div>
           </div>
-          <div className="col-span-3 mt-28 px-28">
+          <div className="lg:hidden md:hidden col-span-5 mt-36 lg:mt-28 md:mt-28">
             {userPosts &&
               userPosts.map((userPost, index) => (
                 <Post
@@ -84,9 +86,26 @@ const Profile: React.FC = () => {
                 />
               ))}
           </div>
-          <div className="col-span-1 mt-28 lg:block md:block sm:hidden">
+
+          <div className="lg:col-span-3 lg:mt-28 lg:px-28 hidden lg:block">
+            {userPosts &&
+              userPosts.map((userPost, index) => (
+                <Post
+                  key={index}
+                  title={userPost.title}
+                  photo={userPost.photo}
+                  caption={userPost.caption}
+                  location={userPost.location}
+                  postID={userPost._id}
+                  userUpVotedPosts={user?.userUpVotedPosts ?? []}
+                  userDownVotedPosts={user?.userDownVotedPosts ?? []}
+                  isDeletePage={true}
+                />
+              ))}
+          </div>
+          <div className="col-span-1 mt-28">
             <div className="w-full">
-              <div className="fixed">
+              <div className="fixed lg:block md:block hidden">
                 <Sidebar />
               </div>
             </div>

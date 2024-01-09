@@ -46,15 +46,13 @@ const MapPage = () => {
                 <Navbar />
                 <main className="container-fluid mx-0 grid grid-cols-5 screen h-screen sm:">
                     <div className="col-span-1 mt-28">
-                        <div className="w-full top-28">
-
-                        </div>
+                        <div className="w-full top-28"></div>
                     </div>
                     <div className="col-span-3 mt-28">
                         <LeafletMap mapPosts={mapPosts} />
                     </div>
                     <div className="col-span-1 mt-28 lg:block md:block sm:hidden">
-                        <div className="w-full">
+                        <div className="fixed lg:block md:block hidden">
                             <Sidebar />
                         </div>
                     </div>
