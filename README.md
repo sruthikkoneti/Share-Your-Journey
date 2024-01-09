@@ -23,7 +23,8 @@
 ```.env``` in the backend should contain
 ```DB_URL``` ```JWT_SECRET``` ```PORT```
 ```.env``` in the backend should contain
-```VITE_HOST``` ```VITE_HOST```
+```VITE_HOST``` ```VITE_HOST_URL```
+
 ```VITE_HOST``` can be ```http://localhost:5000/```
 and ```VITE_HOST_URL``` be ```http:..localhost:5000/api```
 
