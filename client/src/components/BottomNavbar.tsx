@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { FaUser, FaPlus, FaSearch, FaSignOutAlt, FaMap } from 'react-icons/fa'; // Import Flat Color Icons
+import { FaUser, FaPlus, FaSignOutAlt, FaMap } from 'react-icons/fa'; // Import Flat Color Icons
 
 const BottomNavbar: React.FC = () => {
   const navigate = useNavigate();
